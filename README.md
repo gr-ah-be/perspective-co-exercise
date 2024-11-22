@@ -16,3 +16,10 @@ This project skeleton contains a basic Express setup one endpoint to create a us
 Feel free to add or change this project as you like.
 
 
+List of potentiel improvements: 
+
+- Use No SQL sanitizer to avoid NoSQL sanitization. It wasn't needed in this case as we don't do any dynamic queries from user input.
+- Use authentification mechanism. Not needed for this case.
+-  
+
+

@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - '3111:3111' # Map host port 3111 to container port 3111
+        environment:
+            - PORT=3111
+            - MONGO_URI=mongodb://mongo:27017/backend-test
+            - NODE_ENV=development
+        depends_on:
+            - mongo # Ensures the app starts only after MongoDB is running
+        volumes:
+            - .:/usr/src/app
+            - /usr/src/app/node_modules # Prevent node_modules from being overwritten by the host
+
+    mongo:
+        image: mongo:6.0 # Use the official MongoDB image
+        container_name: mongodb
+        ports:
+            - '27017:27017' # Expose MongoDB on port 27017
+        volumes:
+            - mongo-data:/data/db # Persist MongoDB data locally
+
+volumes:
+    mongo-data: # Named volume for MongoDB data persistence
