@@ -23,8 +23,6 @@ const UserSchema: Schema = new Schema(
         lastName: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         phone: { type: String, required: true },
-        // createdAt: { type: Date, default: Date.now }, // TODO: check createdAt
-        // updatedAt: { type: Date, default: Date.now }, // TODO: check updatedAt
     },
     { timestamps: true },
 );

@@ -6,11 +6,9 @@ dotenv.config();
 
 const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/backend-test';
 
-logger.info(`MongoDB URI: ${mongoUri}`); // TODO: remove
-
-export const connectDB = async () => {
+export const connectDB = async (connectionUrl?: string) => {
     try {
-        await mongoose.connect(mongoUri);
+        await mongoose.connect(connectionUrl ?? mongoUri);
         logger.info('Database connection established successfully.');
         mongoose.connection.on('disconnected', () => {
             logger.info('Disconnected from database');
