@@ -3,8 +3,10 @@ import { connectDB, disconnectDB } from '../config/database';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 
+let mongoServer: MongoMemoryServer;
+
 export const setup = async () => {
-    const mongoServer = await MongoMemoryServer.create({
+    mongoServer = await MongoMemoryServer.create({
         instance: {
             dbName: 'backend-test',
         },
@@ -21,6 +23,7 @@ export const clearData = async () => {
 export const destroy = async () => {
     await mongoose.connection.db.collection('users').deleteMany({});
     await disconnectDB();
+    await mongoServer.stop();
 };
 
 export const insertData = async () => {
