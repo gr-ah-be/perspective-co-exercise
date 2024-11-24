@@ -12,7 +12,7 @@ This project provides a basic implementation for managing users in a database us
 
 ## Scripts
 
-- `npm install` Install dependencies to run tests or dev server without docker.
+-   `npm install` Install dependencies to run tests or dev server without docker.
 
 -   `npm start`: Starts the server
 -   `npm run dev`: Starts the nodemon dev server
@@ -20,13 +20,13 @@ This project provides a basic implementation for managing users in a database us
 
 ## Run the development containers:
 
-````bash
+```bash
 docker-compose up --build
-````
+```
 
 ## Project Structure
 
-````
+```
 
 src/
 ├── config/ # Configurations (database, logger, etc.)
@@ -39,7 +39,7 @@ src/
 ├── utils/ # Reusable helpers.
 └── app.ts # App setup.
 
-````
+```
 
 ## Endpoints
 
@@ -57,7 +57,7 @@ src/
     "email": "john.doe@example.com",
     "phone": "1234567890"
 }
-````
+```
 
 -   Response:
 
@@ -95,3 +95,12 @@ src/
     }
 ]
 ```
+
+## CI Pipeline
+
+The CI pipeline is defined in the `.github/workflows/test.yaml` file and runs the following commands:
+
+-   `npm run ci:lint`: Runs the ESLint linter to check for code style and formatting issues.
+-   `npm run ci:test`: Runs the Jest test suite to ensure that the code is working correctly.
+
+The pipeline is triggered on push to the main branch and on Pull Requests and provides a way to ensure that the code is always in a good state.
