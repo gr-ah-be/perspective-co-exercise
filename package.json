@@ -7,6 +7,7 @@
         "build": "tsc",
         "start": "npm run build && node dist/index.js",
         "test": "set DEBUG=* && jest --testPathPattern=test --coverage",
+        "test:ci": "set DEBUG=* && jest --testPathPattern=test --ci --coverage",
         "lint": "eslint 'src/**/*.{js,ts}'",
         "lint:fix": "eslint 'src/**/*.{js,ts}' --fix",
         "dev": "nodemon --watch src --exec ts-node src/index.ts"

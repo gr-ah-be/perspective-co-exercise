@@ -13,7 +13,6 @@ export const createUserHandler = async (req: Request, res: Response, next: NextF
             email,
             phone,
         });
-        throw new Error('JUST TESTING');
         res.status(201).send(createdUser);
     } catch (error) {
         if (error instanceof DatabaseError) {

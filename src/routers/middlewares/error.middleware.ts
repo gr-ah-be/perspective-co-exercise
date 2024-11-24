@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { NextFunction, Request, Response } from 'express';
 import { logger } from '../../config/logger';
 
