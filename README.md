@@ -12,11 +12,13 @@ This project provides a basic implementation for managing users in a database us
 
 ## Scripts
 
+- `npm install` Install dependencies to run tests or dev server without docker.
+
 -   `npm start`: Starts the server
 -   `npm run dev`: Starts the nodemon dev server
 -   `npm test`: Executes the tests
 
-## Run the development server:
+## Run the development containers:
 
 ````bash
 docker-compose up --build
