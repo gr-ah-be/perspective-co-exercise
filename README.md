@@ -16,20 +16,29 @@ This project provides a basic implementation for managing users in a database us
 -   `npm run dev`: Starts the nodemon dev server
 -   `npm test`: Executes the tests
 
+## Run the development server:
+
+````bash
+docker-compose up --build
+````
+
+
 ## Project Structure
 
-```
+````
+
 src/
-├── config/         # Configurations (database, logger, etc.)
-├── controllers/    # Handles HTTP requests.
-├── errors/         # Custom error classes.
-├── models/         # Mongoose schemas/models.
-├── repositories/   # Database queries abstraction.
-├── routers/        # Route definitions.
-├── services/       # Business logic.
-├── utils/          # Reusable helpers.
-└── app.ts          # App setup.
-```
+├── config/ # Configurations (database, logger, etc.)
+├── controllers/ # Handles HTTP requests.
+├── errors/ # Custom error classes.
+├── models/ # Mongoose schemas/models.
+├── repositories/ # Database queries abstraction.
+├── routers/ # Route definitions.
+├── services/ # Business logic.
+├── utils/ # Reusable helpers.
+└── app.ts # App setup.
+
+````
 
 ## Endpoints
 
@@ -47,7 +56,7 @@ src/
     "email": "john.doe@example.com",
     "phone": "1234567890"
 }
-```
+````
 
 -   Response:
 
@@ -85,4 +94,3 @@ src/
     }
 ]
 ```
-

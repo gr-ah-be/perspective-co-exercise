@@ -1,20 +1,16 @@
-# Use an official Node.js runtime as a parent image
-FROM node:18
-
-# Set the working directory inside the container
+# Build Stage
+FROM node:18-alpine AS builder
 WORKDIR /usr/src/app
-
-# Copy package.json and package-lock.json for dependency installation
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
-
-# Copy the entire project into the working directory
 COPY . .
+RUN npm run build
 
-# Expose the application port
+
+FROM node:18-alpine
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app/dist ./dist
+COPY package*.json ./
+RUN npm install --production
 EXPOSE 3111
-
-# Define the default command to start the application
-CMD ["npm", "start"]
+CMD ["node", "dist/index.js"]

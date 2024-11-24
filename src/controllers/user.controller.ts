@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { createUser, getAllUsers } from '../services/user.service';
 import { DatabaseError } from '../errors';
 import { createUserSchema, getUsersQuerySchema } from '../models/user.schema';
 
-export const createUserHandler = async (req: Request, res: Response) => {
+export const createUserHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { firstName, lastName, email, phone } = createUserSchema.parse(req.body);
 
@@ -13,6 +13,7 @@ export const createUserHandler = async (req: Request, res: Response) => {
             email,
             phone,
         });
+        throw new Error('JUST TESTING');
         res.status(201).send(createdUser);
     } catch (error) {
         if (error instanceof DatabaseError) {
@@ -20,11 +21,11 @@ export const createUserHandler = async (req: Request, res: Response) => {
                 .status(error.statusCode)
                 .send({ message: error.message, errors: error.errors });
         }
-        throw error;
+        next(error);
     }
 };
 
-export const getUsersHandler = async (req: Request, res: Response) => {
+export const getUsersHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const validatedQuery = getUsersQuerySchema.parse(req.query);
 
@@ -38,6 +39,6 @@ export const getUsersHandler = async (req: Request, res: Response) => {
         if (error instanceof DatabaseError) {
             res.status(500).send({ message: error.message });
         }
-        throw error;
+        next(error);
     }
 };
