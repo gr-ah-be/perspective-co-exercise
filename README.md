@@ -1,25 +1,88 @@
 # Backend Engineer Work Sample
 
-This project skeleton contains a basic Express setup one endpoint to create a user and one endpoint to fetch all users, as well as a basic empty unit test.
+## Overview
 
-## Scripts 
-`npm start` starts the server
+This project provides a basic implementation for managing users in a database using Express.js, Mongoose, and MongoDB. It includes endpoints to create and retrieve users, with support for sorting and pagination.
 
-`npm test` executes the tests
+## Features
 
-## Goal
-1. Adjust POST /users that it accepts a user and stores it in a database.
-    * The user should have a unique id, a name, a unique email address and a creation date
-2. Adjust GET /users that it returns (all) users from the database.
-   * This endpoint should be able to receive a query parameter `created` which sorts users by creation date ascending or descending.
+-   Create a new user with a unique id, name, email address, and creation date
+-   Retrieve all users with optional sorting and pagination
+-   Support for query parameter `created` to sort users by creation date ascending or descending
 
-Feel free to add or change this project as you like.
+## Scripts
 
+-   `npm start`: Starts the server
+-   `npm run dev`: Starts the nodemon dev server
+-   `npm test`: Executes the tests
 
-List of potentiel improvements: 
+## Project Structure
 
-- Use No SQL sanitizer to avoid NoSQL sanitization. It wasn't needed in this case as we don't do any dynamic queries from user input.
-- Use authentification mechanism. Not needed for this case.
--  
+```
+src/
+├── config/         # Configurations (database, logger, etc.)
+├── controllers/    # Handles HTTP requests.
+├── errors/         # Custom error classes.
+├── models/         # Mongoose schemas/models.
+├── repositories/   # Database queries abstraction.
+├── routers/        # Route definitions.
+├── services/       # Business logic.
+├── utils/          # Reusable helpers.
+└── app.ts          # App setup.
+```
 
+## Endpoints
+
+### 1. Create a User
+
+**POST /users**
+
+-   Description: Adds a new user to the database.
+-   Request Body:
+
+```json
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "phone": "1234567890"
+}
+```
+
+-   Response:
+
+```json
+{
+    "_id": "unique-user-id",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "phone": "1234567890",
+    "createdAt": "2024-11-21T10:00:00.000Z"
+}
+```
+
+### 2. Retrieve All Users
+
+**GET /users**
+
+-   Description: Fetches all users with optional sorting and pagination.
+-   Query Parameters:
+    -   `skip` (optional): Number of users to skip (default: 0).
+    -   `limit` (optional): Number of users to retrieve (default: 10).
+    -   `created` (optional): Sort by creation date. Accepts `asc` or `desc` (default: `asc`).
+-   Response:
+
+```json
+[
+    {
+        "_id": "unique-user-id",
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@example.com",
+        "phone": "1234567890",
+        "createdAt": "2024-11-21T10:00:00.000Z"
+    }
+]
+```
 

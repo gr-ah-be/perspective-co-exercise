@@ -16,7 +16,9 @@ export const createUserHandler = async (req: Request, res: Response) => {
         res.status(201).send(createdUser);
     } catch (error) {
         if (error instanceof DatabaseError) {
-            return res.status(500).send({ message: error.message });
+            return res
+                .status(error.statusCode)
+                .send({ message: error.message, errors: error.errors });
         }
         throw error;
     }

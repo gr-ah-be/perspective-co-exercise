@@ -19,7 +19,19 @@ export const createUser = async (user: CreateUserDto): Promise<IUser> => {
             if (error.code === 11000) {
                 // error thrown when duplicate key is found for a field set as unique.
                 logger.error(error, 'Duplicate key error');
-                throw new DatabaseError('User with provided information already exists');
+                const duplicatedField = Object.keys(error.keyValue)[0];
+                throw new DatabaseError(
+                    `User with provided ${duplicatedField} already exists`,
+                    400,
+                    [
+                        {
+                            field: duplicatedField,
+                            value: error.keyValue[duplicatedField],
+                            message: `User with provided ${duplicatedField} already exists`,
+                            code: 'DUPLICATE',
+                        },
+                    ],
+                );
             }
             logger.error(error, 'Error occured while creating user');
             throw new DatabaseError('Error occured while creating user');
