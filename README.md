@@ -24,7 +24,6 @@ This project provides a basic implementation for managing users in a database us
 docker-compose up --build
 ````
 
-
 ## Project Structure
 
 ````
